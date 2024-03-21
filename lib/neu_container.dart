@@ -55,7 +55,8 @@ class _NeuContainerState extends State<NeuContainer> {
                   blurRadius: 10,
                   spreadRadius: -3
               )
-            ]),
+            ],
+        ),
         child: widget.child,
       ),
     );
