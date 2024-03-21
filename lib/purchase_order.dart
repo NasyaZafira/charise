@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'dialog.dart';
 import 'neu_button.dart';
 import 'neu_container.dart';
+import 'purchase_summary.dart';
 
 class Purchase extends StatefulWidget {
   @override
@@ -52,6 +53,7 @@ class _PurchaseState extends State<Purchase> {
               child: Icon(Icons.keyboard_backspace_sharp),
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               borderRadius: BorderRadius.circular(30),
+              onPressed: () {},
             ),
           ),
           Container(
@@ -74,8 +76,7 @@ class _PurchaseState extends State<Purchase> {
                       size: 80.0,
                     ),
                     title: 'Testing Dialog',
-                    message:
-                        'Asline ini isinya textfield\nHiraukan aja',
+                    message: 'Asline ini isinya textfield\nHiraukan aja',
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(ctx).pop(),
@@ -89,6 +90,7 @@ class _PurchaseState extends State<Purchase> {
                 child: Icon(Icons.search_sharp),
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 borderRadius: BorderRadius.circular(30),
+                onPressed: () {},
               ),
             ),
           ),
@@ -123,7 +125,16 @@ class _PurchaseState extends State<Purchase> {
           Icons.shopping_basket_sharp,
           color: Colors.black87,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PurchaseSummary(
+                itemList: itemList,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

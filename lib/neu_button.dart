@@ -4,9 +4,14 @@ class NeuButton extends StatefulWidget {
   final Widget child;
   final BorderRadius borderRadius;
   final EdgeInsetsGeometry padding;
+  final Function onPressed;
 
-  NeuButton(
-      {required this.child, required this.borderRadius, required this.padding});
+  NeuButton({
+    required this.child,
+    required this.borderRadius,
+    required this.padding,
+    required this.onPressed,
+  });
 
   @override
   _NeuButtonState createState() => _NeuButtonState();
@@ -30,7 +35,10 @@ class _NeuButtonState extends State<NeuButton> {
   @override
   Widget build(BuildContext context) {
     return Listener(
-      onPointerDown: _onPointerDown,
+      onPointerDown: (e) {
+        _onPointerDown(e);
+        widget.onPressed();
+      },
       onPointerUp: _onPointerUp,
       child: Container(
         padding: widget.padding,
@@ -48,10 +56,9 @@ class _NeuButtonState extends State<NeuButton> {
                     ),
                     BoxShadow(
                         color: Colors.black.withOpacity(.2),
-                        offset: Offset(7 , 7),
+                        offset: Offset(7, 7),
                         blurRadius: 10,
-                        spreadRadius: -3
-                    )
+                        spreadRadius: -3)
                   ]),
         child: widget.child,
       ),

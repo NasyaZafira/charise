@@ -9,7 +9,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     final bgColor = Color(0xFFE7ECEF);
@@ -34,6 +33,7 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.center,
               ),
             ),
+            onPressed: () {},
           ),
         ),
       ),
