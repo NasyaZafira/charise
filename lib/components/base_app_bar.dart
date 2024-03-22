@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../neu_button.dart';
+import 'neu_button.dart';
 
 class BaseAppBar extends StatelessWidget {
   final String title;

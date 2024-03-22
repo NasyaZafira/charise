@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'payment_summary.dart';
 
 class PurchaseSummary extends StatefulWidget {
-  final List<Widget> itemList;
-  const PurchaseSummary({Key? key, required this.itemList}) : super(key: key);
+  final List<Map<String, dynamic>> itemProduct;
+  const PurchaseSummary({Key? key, required this.itemProduct}) : super(key: key);
 
   @override
   State<PurchaseSummary> createState() => _PurchaseSummaryState();
@@ -30,11 +30,13 @@ class _PurchaseSummaryState extends State<PurchaseSummary> {
                     Navigator.pop(context);
                   },
                 ),
-                ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: widget.itemList,
-                ),
+                // ListView.builder(
+                //   itemCount: itemProduct.length,
+                //   itemBuilder: (context, index) => [] ,
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   children: widget.itemProduct,
+                // ),
               ],
             ),
           ),

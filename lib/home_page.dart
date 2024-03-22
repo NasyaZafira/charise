@@ -1,7 +1,8 @@
 import 'package:charise/purchase_order.dart';
 import 'package:flutter/material.dart';
 
-import 'neu_button.dart';
+import 'components/neu_button.dart';
+
 
 class HomePage extends StatefulWidget {
   @override

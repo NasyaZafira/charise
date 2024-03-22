@@ -4,15 +4,16 @@ class PlaceholderDialog extends StatelessWidget {
   const PlaceholderDialog({
     this.icon,
     this.title,
-    this.message,
     this.actions = const [],
+    this.controller,
     Key? key,
   }) : super(key: key);
 
   final Widget? icon;
   final String? title;
-  final String? message;
   final List<Widget> actions;
+  final TextEditingController? controller;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +25,15 @@ class PlaceholderDialog extends StatelessWidget {
       title: title == null
           ? null
           : Text(
-        title!,
-        textAlign: TextAlign.center,
-      ),
-      content: message == null
+              title!,
+              textAlign: TextAlign.center,
+            ),
+      content: controller == null
           ? null
-          : Text(
-        message!,
-        textAlign: TextAlign.center,
-      ),
+          : TextField(
+              autofocus: true,
+              controller: controller,
+            ),
       actionsAlignment: MainAxisAlignment.center,
       actionsOverflowButtonSpacing: 8.0,
       actions: actions,

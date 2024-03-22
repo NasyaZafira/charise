@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../neu_container.dart';
+import 'neu_container.dart';
 
 class SummaryItem extends StatelessWidget {
   final int index;
@@ -11,6 +11,7 @@ class SummaryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeuContainer(
+      key: ValueKey([]),
       child: Row(
         children: [
           Container(
