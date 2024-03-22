@@ -7,6 +7,7 @@ import 'components/base_app_bar.dart';
 import 'components/dialog.dart';
 import 'components/neu_button.dart';
 import 'components/neu_container.dart';
+import 'components/order_item.dart';
 import 'purchase_summary.dart';
 
 class Purchase extends StatefulWidget {
@@ -18,18 +19,18 @@ class _PurchaseState extends State<Purchase> {
   TextEditingController dialogController = TextEditingController(text: '');
 
   List<Map<String, dynamic>> itemProduct = [
-    {"id": 0, "product": "mineral 100 ml", "price": 100},
-    {"id": 1, "product": "mineral 200 ml", "price": 200},
-    {"id": 2, "product": "mineral 300 ml", "price": 300},
-    {"id": 3, "product": "mineral 400 ml", "price": 400},
-    {"id": 4, "product": "mineral 500 ml", "price": 500},
-    {"id": 5, "product": "mineral 600 ml", "price": 600},
-    {"id": 6, "product": "mineral 700 ml", "price": 700},
-    {"id": 7, "product": "mineral 800 ml", "price": 800},
-    {"id": 8, "product": "mineral 900 ml", "price": 900},
-    {"id": 9, "product": "mineral 1000 ml", "price": 1000},
-    {"id": 10, "product": "mineral 1100 ml", "price": 1100},
-    {"id": 11, "product": "mineral 1200 ml", "price": 1200}
+    {"id": 0, "product": "mineral 100 ml", "price": 100, "qty": 0},
+    {"id": 1, "product": "mineral 200 ml", "price": 200, "qty": 0},
+    {"id": 2, "product": "mineral 300 ml", "price": 300, "qty": 0},
+    {"id": 3, "product": "mineral 400 ml", "price": 400, "qty": 0},
+    {"id": 4, "product": "mineral 500 ml", "price": 500, "qty": 0},
+    {"id": 5, "product": "mineral 600 ml", "price": 600, "qty": 0},
+    {"id": 6, "product": "mineral 700 ml", "price": 700, "qty": 0},
+    {"id": 7, "product": "mineral 800 ml", "price": 800, "qty": 0},
+    {"id": 8, "product": "mineral 900 ml", "price": 900, "qty": 0},
+    {"id": 9, "product": "mineral 1000 ml", "price": 1000, "qty": 0},
+    {"id": 10, "product": "mineral 1100 ml", "price": 1100, "qty": 0},
+    {"id": 11, "product": "mineral 1200 ml", "price": 1200, "qty": 0}
   ];
 
   List<Map<String, dynamic>> searchProduct = [];
@@ -60,13 +61,12 @@ class _PurchaseState extends State<Purchase> {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = Color(0xFFE7ECEF);
+    const bgColor = Color(0xFFE7ECEF);
 
-    // TODO: implement build
     return Scaffold(
       backgroundColor: bgColor,
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: SingleChildScrollView(
@@ -79,67 +79,50 @@ class _PurchaseState extends State<Purchase> {
                   },
                 ),
                 SecondContainer(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 5,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
                   child: TextField(
                     onChanged: (value) => _runFilter(value),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(13),
                         hintText: 'Search',
                         suffixIcon: Icon(Icons.search)),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  borderRadius: BorderRadius.circular(50),
                 ),
                 ListView.builder(
                   itemCount: searchProduct.length,
-                  itemBuilder: (context, index) => NeuContainer(
-                    key: ValueKey(searchProduct[index]["id"]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(searchProduct[index]["id"].toString()),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          searchProduct[index]["product"],
-                        ),
-                        Text("Rp" + searchProduct[index]["price"].toString()),
-                        Stack(
-                          alignment: AlignmentDirectional.centerEnd,
-                          children: [
-                            Container(
-                              child: Row(
-                                children: [
-                                  NeuButton(
-                                      child: Icon(
-                                          Icons.remove_circle_outline_sharp),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 5,),
-                                      borderRadius: BorderRadius.circular(50),
-                                      onPressed: () {}),
-                                  SecondContainer(
-                                    child: Text('10', textAlign: TextAlign.center,),
-                                    padding: EdgeInsets.symmetric(),
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  NeuButton(
-                                      child:
-                                          Icon(Icons.add_circle_outline_sharp),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 5, ),
-                                      borderRadius: BorderRadius.circular(50),
-                                      onPressed: () {}),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  itemBuilder: (context, index) {
+                    int qty = searchProduct[index]["qty"];
+
+                    return OrderItem(
+                      data: searchProduct[index],
+                      qty: qty,
+                      onDecreasePressed: () {
+                        setState(() {
+                          searchProduct[index] = {
+                            "id": searchProduct[index]["id"],
+                            "product": searchProduct[index]["product"],
+                            "price": searchProduct[index]["price"],
+                            "qty": qty > 0 ? qty - 1 : qty
+                          };
+                        });
+                      },
+                      onIncreasePressed: () {
+                        setState(() {
+                          searchProduct[index] = {
+                            "id": searchProduct[index]["id"],
+                            "product": searchProduct[index]["product"],
+                            "price": searchProduct[index]["price"],
+                            "qty": qty + 1,
+                          };
+                        });
+                      },
+                    );
+                  },
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                 ),
@@ -150,7 +133,7 @@ class _PurchaseState extends State<Purchase> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey[100],
-        child: Icon(
+        child: const Icon(
           Icons.shopping_basket_sharp,
           color: Colors.black87,
         ),
@@ -159,7 +142,10 @@ class _PurchaseState extends State<Purchase> {
             context,
             MaterialPageRoute(
               builder: (context) => PurchaseSummary(
-                itemProduct: itemProduct,
+                itemProduct: itemProduct.where((products) {
+                  int qty = products["qty"];
+                  return qty > 0;
+                }).toList(),
               ),
             ),
           );

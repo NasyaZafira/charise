@@ -1,12 +1,13 @@
 import 'package:charise/components/base_app_bar.dart';
+import 'package:charise/components/summary_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'payment_summary.dart';
 
 class PurchaseSummary extends StatefulWidget {
   final List<Map<String, dynamic>> itemProduct;
-  const PurchaseSummary({Key? key, required this.itemProduct}) : super(key: key);
+
+  const PurchaseSummary({super.key, required this.itemProduct});
 
   @override
   State<PurchaseSummary> createState() => _PurchaseSummaryState();
@@ -16,9 +17,9 @@ class _PurchaseSummaryState extends State<PurchaseSummary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE7ECEF),
+      backgroundColor: const Color(0xFFE7ECEF),
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: SingleChildScrollView(
@@ -30,13 +31,14 @@ class _PurchaseSummaryState extends State<PurchaseSummary> {
                     Navigator.pop(context);
                   },
                 ),
-                // ListView.builder(
-                //   itemCount: itemProduct.length,
-                //   itemBuilder: (context, index) => [] ,
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   children: widget.itemProduct,
-                // ),
+                ListView.builder(
+                  itemCount: widget.itemProduct.length,
+                  itemBuilder: (context, index) => SummaryItem(
+                    data: widget.itemProduct[index],
+                  ),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                ),
               ],
             ),
           ),
