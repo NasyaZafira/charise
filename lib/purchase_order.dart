@@ -1,12 +1,7 @@
 import 'package:charise/components/second_container.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'components/base_app_bar.dart';
-import 'components/dialog.dart';
-import 'components/neu_button.dart';
-import 'components/neu_container.dart';
 import 'components/order_item.dart';
 import 'purchase_summary.dart';
 
