@@ -62,7 +62,7 @@ class SummaryItem extends StatelessWidget {
               horizontal: 16,
             ),
             decoration: BoxDecoration(
-              color: Colors.green.shade300,
+              color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(24),
             ),
             child: Text(

@@ -67,7 +67,7 @@ class _OrderItemState extends State<OrderItem> {
           Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: Colors.green.shade300,
+              color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(24),
             ),
             child: Row(
