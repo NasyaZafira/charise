@@ -1,6 +1,6 @@
 # charise
 
-A new Flutter project.
+A new Flutter project. simple product sales application
 
 ## Getting Started
 
