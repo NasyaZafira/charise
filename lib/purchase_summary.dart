@@ -47,7 +47,7 @@ class _PurchaseSummaryState extends State<PurchaseSummary> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey[100],
         child: const Icon(
-          Icons.payments,
+          Icons.save_sharp,
           color: Colors.black87,
         ),
         onPressed: () {
